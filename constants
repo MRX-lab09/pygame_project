@@ -1,0 +1,12 @@
+# Константы
+BLACK = (0, 0, 0) ---- цвет заднего плана
+WHITE = (255, 255, 255) ---- цвет шарика
+GREEN = (0, 255, 0) ---- цвет платформы
+
+WIDTH, HEIGHT = 900, 600 --- размеры окна
+
+screen = pygame.display.set_mode((WIDTH, HEIGHT)) -- экран
+
+pygame.display.set_caption("Pong") ---- название окна
+
+FPS = 30 ---- частота файлов в секунду
