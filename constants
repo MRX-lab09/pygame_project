@@ -10,3 +10,4 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT)) -- экран
 pygame.display.set_caption("Pong") ---- название окна
 
 FPS = 30 ---- частота файлов в секунду
+r = 20 ---- радиус мяча
