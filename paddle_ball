@@ -1,0 +1,68 @@
+class Paddle:
+    def __init__(self, x, y, width, height, speed, is_static=False):
+        self.rect = pygame.Rect(x, y, width, height)
+        self.speed = speed
+        self.is_static = is_static
+
+    def move(self, mouse_y):
+        if not self.is_static:
+            self.rect.y = mouse_y - self.rect.height // 2
+            self.rect.y = max(0, min(self.rect.y, HEIGHT - self.rect.height))
+
+    def draw(self, screen):
+        pygame.draw.rect(screen, WHITE, self.rect)
+
+
+class Ball:
+    def __init__(self, x, y, size, speed_x, speed_y):
+        self.rect = pygame.Rect(x, y, size, size)
+        self.speed_x = speed_x
+        self.speed_y = speed_y
+
+    def move(self):
+        self.rect.x += self.speed_x
+        self.rect.y += self.speed_y
+
+    def bounce(self, paddle1, paddle2):
+        if self.rect.colliderect(paddle1.rect) or self.rect.colliderect(paddle2.rect):
+            self.speed_x *= -1
+        if self.rect.top <= 0 or self.rect.bottom >= HEIGHT:
+            self.speed_y *= -1
+
+    def reset(self):
+        self.rect.x = WIDTH // 2 - self.rect.width // 2
+        self.rect.y = HEIGHT // 2 - self.rect.height // 2
+        self.speed_x *= -1
+
+    def draw(self, screen):
+        pygame.draw.ellipse(screen, WHITE, self.rect)
+
+
+paddle1 = Paddle(50, HEIGHT // 2 - PADDLE_HEIGHT // 2, PADDLE_WIDTH, PADDLE_HEIGHT, PADDLE_SPEED)
+paddle2 = Paddle(WIDTH - 50 - PADDLE_WIDTH, HEIGHT // 2 - PADDLE_HEIGHT // 2, PADDLE_WIDTH, PADDLE_HEIGHT, PADDLE_SPEED,
+                 is_static=True)
+ball = Ball(WIDTH // 2 - BALL_SIZE // 2, HEIGHT // 2 - BALL_SIZE // 2, BALL_SIZE, BALL_SPEED_X, BALL_SPEED_Y)
+
+clock = pygame.time.Clock()
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+    paddle1.move(mouse_y)
+
+    ball.move()
+    ball.bounce(paddle1, paddle2)
+
+    if ball.rect.left < 0 or ball.rect.right > WIDTH:
+        ball.reset()
+
+    screen.fill(BLACK)
+    paddle1.draw(screen)
+    paddle2.draw(screen)
+    ball.draw(screen)
+    pygame.display.flip()
+
+    clock.tick(60)
