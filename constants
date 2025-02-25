@@ -1,13 +1,16 @@
-# Константы
-BLACK = (0, 0, 0) ---- цвет заднего плана
-WHITE = (255, 255, 255) ---- цвет шарика
-GREEN = (0, 255, 0) ---- цвет платформы
+import pygame
+import sys
 
-WIDTH, HEIGHT = 900, 600 --- размеры окна
+pygame.init()
 
-screen = pygame.display.set_mode((WIDTH, HEIGHT)) -- экран
+WIDTH, HEIGHT = 800, 600
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Пинг-Понг")
 
-pygame.display.set_caption("Pong") ---- название окна
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
 
-FPS = 30 ---- частота файлов в секунду
-r = 20 ---- радиус мяча
+PADDLE_WIDTH, PADDLE_HEIGHT = 15, 100
+BALL_SIZE = 20
+PADDLE_SPEED = 10
+BALL_SPEED_X, BALL_SPEED_Y = 7, 7
