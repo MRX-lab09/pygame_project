@@ -1,5 +1,7 @@
 import pygame
 import sys
+import json
+import os
 
 pygame.init()
 
@@ -11,15 +13,9 @@ BLUE = (0, 0, 255)
 RED = (255, 0, 0)
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
+YELLOW = (255, 255, 0)
+GREY = (100, 100, 100)
+DARK_GREY = (50, 50, 50)
 
 BUTTON_WIDTH, BUTTON_HEIGHT = 200, 50
 BUTTON_X = WIDTH // 2 - BUTTON_WIDTH // 2
-
-BALL_SPEED_X = 6
-BALL_SPEED_Y = 6
-PADDLE_LEFT_SPEED = 15
-PADDLE_RIGHT_SPEED = 4
-
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Пинг-Понг")
-clock = pygame.time.Clock()
